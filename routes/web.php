@@ -43,6 +43,7 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::post('/loans/{id}/reject', [LoanRequestController::class, 'reject'])->name('admin.loans.reject');
     Route::post('/loans/{id}/pickup', [LoanRequestController::class, 'pickup'])->name('admin.loans.pickup');
     Route::post('/loans/{id}/return', [LoanRequestController::class, 'returnItem'])->name('admin.loans.return');
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     
     // FAQ Management
     Route::get('/faqs', [FaqController::class, 'adminIndex'])->name('admin.faqs.index');

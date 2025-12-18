@@ -33,18 +33,29 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'role' => ['required', 'in:student,admin'], // Validasi role
+            'nomor_induk' => ['nullable', 'string', 'max:20'], // Validasi nomor induk
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => $request->role,          // Simpan role
+            'nomor_induk' => $request->nomor_induk, // Simpan nomor induk
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
+        // Redirect logika (bisa disesuaikan jika admin dan mahasiswa punya dashboard beda)
+        if ($user->role === 'admin') {
+            return redirect(route('dashboard', absolute: false)); // Atau ganti ke route khusus admin
+        }
+
         return redirect(route('dashboard', absolute: false));
     }
+
+      
 }

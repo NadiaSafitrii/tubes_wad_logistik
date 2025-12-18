@@ -28,6 +28,21 @@
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
+        <div class="mt-4">
+            <x-input-label for="nomor_induk" :value="__('Nomor Induk (NIM / NIP)')" />
+            <x-text-input id="nomor_induk" class="block mt-1 w-full" type="text" name="nomor_induk" :value="old('nomor_induk')" required />
+            <x-input-error :messages="$errors->get('nomor_induk')" class="mt-2" />
+        </div>
+
+        <div class="mt-4">
+            <x-input-label for="role" :value="__('Daftar Sebagai')" />
+            <select id="role" name="role" class="block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                <option value="student">Mahasiswa</option>
+                <option value="admin">Admin</option>
+            </select>
+            <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
         <!-- Confirm Password -->
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
